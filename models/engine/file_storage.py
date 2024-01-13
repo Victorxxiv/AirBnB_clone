@@ -1,10 +1,16 @@
 #!/usr/bin/python3
 """ A module to handle file serialization and deserialization """
 
-
 import json
 import os.path
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.place import Place
+from models.user import User
+from models.state import State
+from models.review import Review
+from models.city import City
+
 
 
 class FileStorage():
@@ -39,7 +45,7 @@ class FileStorage():
         new_dict = {}
         for k, v in FileSto_obj_dict.items():
             new_dict[k] = v.to_dict()
-        with open(FileStorage.__file_path, "+a") as json_file:
+        with open(FileStorage.__file_path, "w") as json_file:
             json.dump(new_dict, json_file)
 
     def reload(self):
