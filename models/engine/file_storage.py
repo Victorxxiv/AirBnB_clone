@@ -12,7 +12,6 @@ from models.review import Review
 from models.city import City
 
 
-
 class FileStorage():
     """ Definition of the class Filestorage to handle storage of files """
 
@@ -34,9 +33,8 @@ class FileStorage():
         """
         FileSto_obj_dict = FileStorage.__objects
         obj_class_name = obj.__class__.__name__
-        key = "{}.{}".format(obj_class_name,obj.id)
+        key = "{}.{}".format(obj_class_name, obj.id)
         FileSto_obj_dict[key] = obj
-
 
     def save(self):
         """ Changes a __objects dict to a JSON file """
