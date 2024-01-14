@@ -33,18 +33,14 @@ class FileStorage():
         """
         FileSto_obj_dict = FileStorage.__objects
         obj_class_name = obj.__class__.__name__
-        key = "{}.{}".format(obj_class_name, obj.id)
-        FileSto_obj_dict[key] = obj
+        FileSto_obj_dict["{}.{}".format(obj_class_name, obj.id)] = obj
 
     def save(self):
         """ Changes a __objects dict to a JSON file """
-
-        FileSto_obj_dict = FileStorage.__objects
-        new_dict = {}
-        for k, v in FileSto_obj_dict.items():
-            new_dict[k] = v.to_dict()
-        with open(FileStorage.__file_path, "w") as json_file:
-            json.dump(new_dict, json_file)
+        FSobjdict = FileStorage.__objects
+        obj_dict = {obj: FSobjdict[obj].to_dict() for obj in FSobjdict.keys()}
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(obj_dict, f)
 
     def reload(self):
         """
