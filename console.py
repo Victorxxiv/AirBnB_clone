@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import cmd
 
+import cmd
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -13,9 +13,8 @@ from shlex import split
 import re
 import json
 
-"""Console to
-manage
-hbnb data
+"""
+Console to manage hbnb data
 """
 
 
