@@ -31,9 +31,8 @@ class FileStorage():
         Args:
             obj: is the instance of the class to add to the dict __object
         """
-        FileSto_obj_dict = FileStorage.__objects
-        obj_class_name = obj.__class__.__name__
-        FileSto_obj_dict["{}.{}".format(obj_class_name, obj.id)] = obj
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """ Changes a __objects dict to a JSON file """
