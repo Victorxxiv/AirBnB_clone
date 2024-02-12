@@ -1,52 +1,39 @@
 #!/usr/bin/python3
-""" A module to handle file serialization and deserialization """
-
+"""This module defines a class to manage file storage for hbnb clone"""
 import json
 import os.path
 from models.base_model import BaseModel
-from models.amenity import Amenity
-from models.place import Place
 from models.user import User
+from models.place import Place
 from models.state import State
-from models.review import Review
 from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
-class FileStorage():
-    """ Definition of the class Filestorage to handle storage of files """
-
+class FileStorage:
+    """This class manages storage of hbnb models in JSON format"""
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """ Returns all the instances stored in a dictionary "__objects" """
-
+        """Returns a dictionary of models currently in storage"""
         return FileStorage.__objects
 
     def new(self, obj):
-        """ Adds a new Key-value pair into the dictionary __objects with
-        key as <class name>.id and value as object created
-        <class name> is the class  from which an object has been instantiated
-
-        Args:
-            obj: is the instance of the class to add to the dict __object
-        """
+        """Adds new object to storage dictionary"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """ Changes a __objects dict to a JSON file """
-        FSobjdict = FileStorage.__objects
-        obj_dict = {obj: FSobjdict[obj].to_dict() for obj in FSobjdict.keys()}
+        """Saves storage dictionary to file"""
+        odict = FileStorage.__objects
+        objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
         with open(FileStorage.__file_path, "w") as f:
-            json.dump(obj_dict, f)
+            json.dump(objdict, f)
 
     def reload(self):
-        """
-        Deserializes the json file back __objects dict is
-        Reloading objects from jsonfile
-        """
-
+        """Loads storage dictionary from file"""
         try:
             with open(FileStorage.__file_path) as f:
                 objdict = json.load(f)
